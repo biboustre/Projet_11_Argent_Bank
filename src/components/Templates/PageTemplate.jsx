@@ -1,23 +1,20 @@
 import "../Templates/Template.css";
 import Footer from "../../components/Organisms/Footer/Footer";
 // import Header from "../../components/Organisms/Header/Header";
-import PropTypes from 'prop-types';
-
+import PropTypes from "prop-types";
 
 const Template = ({ children }) => {
-    return (
-        <body>
+  return (
+    <div className="body">
       {/* <Header name="login" /> */}
-            <main class="main bg-dark">
-                {children}
-            </main>
-            <Footer />
-        </body>
-    )
-}
+      <main className="main bg-dark">{children}</main>
+      <Footer />
+    </div>
+  );
+};
 
 Template.propTypes = {
-    children: PropTypes.node 
-}
+  children: PropTypes.node,
+};
 
 export default Template;
