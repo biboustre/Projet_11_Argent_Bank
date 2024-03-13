@@ -1,33 +1,5 @@
-// import { createSlice } from "@reduxjs/toolkit";
-
-// const initialState = {
-//   username: "",
-//   password: "",
-// };
-
-// export const login = createSlice({
-//   name: "login",
-//   initialState,
-//   reducers: {
-//     setUsername(state, action) {
-//       state.username = action.payload;
-//     },
-//     setPassword(state, action) {
-//       state.password = action.payload;
-//     },
-//     resetCredentials(state) {
-//       state.username = "";
-//       state.password = "";
-//     },
-//   },
-// });
-// console.log(login);
-
-// export const { setUsername, setPassword, resetCredentials } = login.actions;
-
-// export default login.reducer; 
-
 import { createSlice } from "@reduxjs/toolkit";
+import Login from "../pages/Login/Login";
 
 export const authSlice = createSlice({
   name: "auth",
@@ -56,10 +28,13 @@ export const authSlice = createSlice({
       state.token = null;
       state.error = null;
     },
+    login: (state, action) => {
+     
+    },
   },
 });
 
-export const { loginSuccess, loginFailure, logout } = authSlice.actions;
+export const { loginSuccess, loginFailure, logout, login } = authSlice.actions;
 
 export const selectAuth = (state) => state.auth;
 

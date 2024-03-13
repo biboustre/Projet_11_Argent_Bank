@@ -3,46 +3,10 @@ import Template from "../../components/Templates/PageTemplate";
 import Header from "../../components/Organisms/Header/Header";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginSuccess, loginFailure } from "../../features/authSlice";
+import { loginSuccess, loginFailure, login } from "../../features/authSlice";
 import User from "../User/User";
 
 function Login() {
-  // const dispatch = useDispatch();
-  // const history = useHistory();
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
-  // const handleLogin = async (e) => {
-  //   e.preventDefault();
-
-  //   const myHeaders = new Headers();
-  //   myHeaders.append("Content-Type", "application/json");
-
-  //   const raw = JSON.stringify({
-  //     username,
-  //     password
-  //   })
-
-  //   const requestOptions = {
-  //     method: "POST",
-  //     headers: myHeaders,
-  //     body: raw,
-  //    redirect: "follow"
-  //   };
-
-  //   fetch("http://localhost:3001/api/v1/user/login", requestOptions)
-  //     .then((response) => {
-  //       if (response.status == 200) {
-  //         return response.json().then(userData => {
-  //           dispatch(setUsername(userData.username));
-  //           dispatch(setPassword(userData.password));
-  //           history.push('/user');
-  //       });
-  //     }else{
-  //       throw new Error('Erreur de connexion');
-  //     }
-  //   })
-  //       .catch((error) => console.error(error));
-  // }
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -50,30 +14,14 @@ function Login() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const { error } = useSelector((state) => state.auth);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:3001/api/v1/user/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await response.json();
-      console.log(data);
-
-      if (response === 200) {
-        localStorage.setItem("token", data.token);
-        dispatch(loginSuccess({ username: data.username, token: data.token }));
-      } else {
-        dispatch(loginFailure(data.error));
+    login(
+      {
+        username,
+        password
       }
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    )
   };
 
   if (isAuthenticated) {
@@ -121,9 +69,7 @@ function Login() {
               Sign In
             </a> */}
             {/* <!-- SHOULD BE THE BUTTON BELOW --> */}
-            <button className="sign-in-button">
-              Login
-            </button>
+            <button className="sign-in-button">Login</button>
             {/* <!--  --> */}
           </form>
         </section>
