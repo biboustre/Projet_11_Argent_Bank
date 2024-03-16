@@ -3,30 +3,16 @@ import Template from "../../components/Templates/PageTemplate";
 import Header from "../../components/Organisms/Header/Header";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginSuccess, loginFailure, login } from "../../features/authSlice";
-import User from "../User/User";
 
 function Login() {
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const { error } = useSelector((state) => state.auth);
 
-  const handleSubmit =  (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    login(
-      {
-        username,
-        password
-      }
-    )
+    dispatch(userLogin({ username, password }));
   };
-
-  if (isAuthenticated) {
-    return <User />;
-  }
 
   return (
     <Template>
@@ -64,13 +50,8 @@ function Login() {
               <input type="checkbox" id="remember-me" />
               <label htmlFor="remember-me">Remember me</label>
             </div>
-            {/* <!-- PLACEHOLDER DUE TO STATIC SITE --> */}
-            {/* <a href="./user.html" className="sign-in-button">
-              Sign In
-            </a> */}
-            {/* <!-- SHOULD BE THE BUTTON BELOW --> */}
-            <button className="sign-in-button">Login</button>
-            {/* <!--  --> */}
+            <button className="sign-in-button" >Login</button>
+            {/* {error && <div className="error-message">{error}</div>} */}
           </form>
         </section>
       </main>
@@ -79,3 +60,8 @@ function Login() {
 }
 
 export default Login;
+
+
+
+
+
