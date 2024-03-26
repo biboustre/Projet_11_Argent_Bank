@@ -3,20 +3,28 @@ import Template from "../../components/Templates/PageTemplate";
 import Header from "../../components/Organisms/Header/Header";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { selectAuth, selectError } from "../../store/authSlice";
+import loginAsync from "../../store/features/loginAsync";
+import { Navigate } from "react-router-dom";
+import User from "../User/User";
 
 function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const isAuthentificated = useSelector(selectAuth);
+  const errorMessage = useSelector(selectError);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(userLogin({ username, password }));
+    dispatch(loginAsync(username, password));
   };
 
+  if (isAuthentificated) {
+    return <Navigate to="/user" />;
+  }
   return (
     <Template>
-      <Header name="Home" link="/" />
       <main className="main bg-dark">
         <section className="sign-in-content">
           <i className="fa fa-user-circle sign-in-icon"></i>
@@ -25,7 +33,7 @@ function Login() {
             <div className="input-wrapper">
               <label htmlFor="username">Username</label>
               <input
-                type="text"
+                type="email"
                 id="username"
                 name="userName"
                 placeholder="Nom d'utilisateur"
@@ -50,8 +58,11 @@ function Login() {
               <input type="checkbox" id="remember-me" />
               <label htmlFor="remember-me">Remember me</label>
             </div>
-            <button className="sign-in-button" >Login</button>
-            {/* {error && <div className="error-message">{error}</div>} */}
+            <button className="sign-in-button">Login</button>
+
+            {errorMessage && (
+              <div className="error-message">{ errorMessage }</div>
+            )}
           </form>
         </section>
       </main>
@@ -60,8 +71,3 @@ function Login() {
 }
 
 export default Login;
-
-
-
-
-

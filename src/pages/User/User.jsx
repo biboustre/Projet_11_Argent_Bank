@@ -1,19 +1,101 @@
 import React from "react";
+import { useState } from "react";
 import "../User/User.css";
 import Template from "../../components/Templates/PageTemplate";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectAuth,
+  selectFullName,
+  selectUsername,
+  selectFirstname,
+  selectLastname,
+} from "../../store/authSlice";
+import { Navigate } from "react-router-dom";
+import { profileUpdateAsync } from "../../store/features/profileUpdateAsync";
 
 function User() {
+  const dispatch = useDispatch();
+  const [formActive, setFormActive] = useState(false);
+  const isAuthentificated = useSelector(selectAuth);
+  const fullName = useSelector(selectFullName);
+  const username = useSelector(selectUsername);
+  const firstname = useSelector(selectFirstname);
+  const lastname = useSelector(selectLastname);
+  const handelProfile = (e) => {
+    dispatch(profileUpdateAsync(e.target.parentElement.username.value));
+  };
+
+  if (!isAuthentificated) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <Template>
-      <Header name="Sign Out" link="/Login" />
       <main className="main bg-dark">
         <div className="header">
           <h1>
             Welcome back
             <br />
-            Tony Jarvis!
+            {fullName}!
           </h1>
-          <button className="edit-button">Edit Name</button>
+          {formActive && (
+            <form action="">
+              <div className="form-group">
+                <label htmlFor="username">username</label>
+                <input
+                  defaultValue={username}
+                  type="text"
+                  id="username"
+                  name="username"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="firstname">Firstname</label>
+                <input
+                  defaultValue={firstname}
+                  disabled
+                  type="text"
+                  id="firstname"
+                  name="firstname"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="lastname">Last name</label>
+                <input
+                  defaultValue={lastname}
+                  disabled
+                  type="text"
+                  id="lastname"
+                  name="lastname"
+                />
+              </div>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  handelProfile(e);
+                }}
+              >
+                Save
+              </button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setFormActive(false);
+                }}
+              >
+                Cancel
+              </button>
+            </form>
+          )}
+          <button
+            className="edit-button"
+            onClick={(e) => {
+              e.preventDefault();
+              setFormActive(true);
+            }}
+          >
+            Edit Name
+          </button>
         </div>
         <h2 className="sr-only">Accounts</h2>
         <section className="account">

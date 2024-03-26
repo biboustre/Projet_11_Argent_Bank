@@ -12,6 +12,9 @@
     text-align: left;
     margin-bottom: 2rem;
   }
+  .bg-dark {
+    background-color: #12002b;
+  } 
   
   .account-amount {
     margin: 0;

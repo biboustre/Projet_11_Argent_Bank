@@ -9,7 +9,6 @@ import Header from "../../components/Organisms/Header/Header";
 function Accueil() {
   return (
     <Template>
-      <Header name="Login" link="/Login" />
       <main className="main bg-dark">
         <div className="hero">
           <section className="hero-content">

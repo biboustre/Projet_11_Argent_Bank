@@ -7,7 +7,7 @@ import User from "./pages/User/User";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import Template from "./components/Templates/PageTemplate";
-import PageError from "./pages/PageError/PageError"
+import PageError from "./pages/PageError/PageError";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -17,10 +17,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route exact path="/" element={<Accueil />} />
           <Route path="/login" element={<Login />} />
           <Route path="/user" element={<User />} />
-          <Route  path="*" element={<PageError />}/>
+          <Route path="*" element={<PageError />} />
         </Routes>
       </BrowserRouter>
-      <Template />
     </Provider>
   </React.StrictMode>
 );

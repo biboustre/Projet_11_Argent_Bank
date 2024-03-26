@@ -1,0 +1,7 @@
+.navBar {
+  display: flex;
+  flex-direction: row;
+}
+.handCursor {
+  cursor: pointer;
+}
