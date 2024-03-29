@@ -1,10 +1,10 @@
 /* .main {
   flex: 1;
 }
-
-.bg-dark {
+*/
+/* .bg-dark {
   background-color: #12002b;
-} */
+}  */
 
 .sr-only {
     border: 0 !important;
@@ -76,6 +76,7 @@
   .features {
     display: flex;
     flex-direction: column;
+    background: white;
   }
   
   @media (min-width: 920px) {

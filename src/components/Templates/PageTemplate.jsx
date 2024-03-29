@@ -7,7 +7,7 @@ const Template = ({ children }) => {
   return (
     <div className="body">
       <Header/>
-      <main className="main bg-dark">{children}</main>
+      <main className="main">{children}</main>
       <Footer />
     </div>
   );

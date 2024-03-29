@@ -16,6 +16,7 @@ import { profileUpdateAsync } from "../../store/features/profileUpdateAsync";
 function User() {
   const dispatch = useDispatch();
   const [formActive, setFormActive] = useState(false);
+  const [buttonActive, setButtonActive] = useState(true);
   const isAuthentificated = useSelector(selectAuth);
   const fullName = useSelector(selectFullName);
   const username = useSelector(selectUsername);
@@ -31,7 +32,7 @@ function User() {
 
   return (
     <Template>
-      <main className="main bg-dark">
+      <main className="main">
         <div className="header">
           <h1>
             Welcome back
@@ -39,9 +40,9 @@ function User() {
             {fullName}!
           </h1>
           {formActive && (
-            <form action="">
+            <form className="form" action="">
               <div className="form-group">
-                <label htmlFor="username">username</label>
+                <label htmlFor="username">Username</label>
                 <input
                   defaultValue={username}
                   type="text"
@@ -69,33 +70,39 @@ function User() {
                   name="lastname"
                 />
               </div>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  handelProfile(e);
-                }}
-              >
-                Save
-              </button>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setFormActive(false);
-                }}
-              >
-                Cancel
-              </button>
+              <section className="form-button">
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handelProfile(e);
+                  }}
+                >
+                  Save
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setFormActive(false);
+                    setButtonActive(true);
+                  }}
+                >
+                  Cancel
+                </button>
+              </section>
             </form>
           )}
-          <button
-            className="edit-button"
-            onClick={(e) => {
-              e.preventDefault();
-              setFormActive(true);
-            }}
-          >
-            Edit Name
-          </button>
+          {buttonActive && (
+            <button
+              className="edit-button"
+              onClick={(e) => {
+                e.preventDefault();
+                setFormActive(true);
+                setButtonActive(false);
+              }}
+            >
+              Edit Name
+            </button>
+          )}
         </div>
         <h2 className="sr-only">Accounts</h2>
         <section className="account">

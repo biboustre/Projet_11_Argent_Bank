@@ -4,7 +4,6 @@ import chat from "../../assets/img/icon-chat.png";
 import security from "../../assets/img/icon-security.png";
 import money from "../../assets/img/icon-money.png";
 import Template from "../../components/Templates/PageTemplate";
-import Header from "../../components/Organisms/Header/Header";
 
 function Accueil() {
   return (
