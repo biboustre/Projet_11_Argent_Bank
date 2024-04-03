@@ -23,7 +23,8 @@ function User() {
   const firstname = useSelector(selectFirstname);
   const lastname = useSelector(selectLastname);
   const handelProfile = (e) => {
-    dispatch(profileUpdateAsync(e.target.parentElement.username.value));
+    const newUsername = e.target.form.username.value;
+    dispatch(profileUpdateAsync(newUsername));
   };
 
   if (!isAuthentificated) {

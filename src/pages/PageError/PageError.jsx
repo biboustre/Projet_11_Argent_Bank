@@ -1,12 +1,14 @@
-import "./PageError.css";
 import Template from "../../components/Templates/PageTemplate";
-import Header from "../../components/Organisms/Header/Header";
+import "./PageError.css";
 
 function PageError() {
 
   return (
     <Template>
-      <Header name="Home" link="/" />
+      <main className="main-error">
+        <p>OUPS</p> <br /> 
+        <p>La page que vous recherchez n'existe pas</p>
+      </main>
     </Template>
   );
 }
